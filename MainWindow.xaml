@@ -1,0 +1,84 @@
+﻿<Window x:Name="MainWindow1" x:Class="Monteur_Video_Simplifie_WFP.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Monteur_Video_Simplifie_WFP"        
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen" Title="Monteur Vidéo Simplifié" ResizeMode="NoResize" Height="860" Width="1485" BorderBrush="Black">
+    <Grid Background="Black" Height="845" VerticalAlignment="Top" Margin="0,-2,0,0">
+
+        <!-- INPUT/OUTPUT FILES MANAGEMENT -->
+        <Label x:Name="input_filepath_label" HorizontalAlignment="Left" Margin="1023,534,0,0" VerticalAlignment="Top" Width="379" Background="Chartreuse" VerticalContentAlignment="Center" Height="20" FontSize="9" FontWeight="Heavy"/>
+        <Button x:Name="load_input_video_filepath_bttn" Content="Browse" HorizontalAlignment="Left" Margin="1407,534,0,0" VerticalAlignment="Top" Height="20" Width="54" Foreground="Chartreuse" Background="Black" BorderBrush="Chartreuse" Click="load_video_from_bttn_Click"/>
+        <Label x:Name="output_directory_label" HorizontalAlignment="Left" Margin="1023,561,0,0" VerticalAlignment="Top" Width="379" Background="Chartreuse" VerticalContentAlignment="Center" Height="20" FontSize="9" FontWeight="Heavy"/>
+        <Button x:Name="set_output_video_directory_bttn" Content="Browse" HorizontalAlignment="Left" Margin="1407,563,0,0" VerticalAlignment="Top" Height="20" Width="54" Foreground="Chartreuse" Background="Black" BorderBrush="Chartreuse" Click="set_output_video_directory_bttn_Click"/>
+
+        <!-- MEDIA PLAYER -->
+        <Border x:Name="border_Video" AllowDrop="True" Drop="video_drop" BorderBrush="#7FFF00" BorderThickness="5" Background="Black" RenderTransformOrigin="0.5,0.5" Height="487" VerticalAlignment="Top">
+            <MediaElement x:Name="mediaElementPlayer" LoadedBehavior ="Manual" Stretch="UniformToFill" ScrubbingEnabled="True" AllowDrop="True" Drop="video_drop" VerticalAlignment="Top"/>
+        </Border>
+
+        <!-- MEDIA PLAYER BUTTONS -->
+        <Button x:Name="prev_frame_bttn" ToolTip="Previous frame" HorizontalAlignment="Left" Height="44" Margin="576,534,0,267"  Width="42" FontWeight="Bold" Foreground="Chartreuse" Background="Black" Click="prev_frame_bttn_Click"/>
+        <Button x:Name="prev_10_bttn" ToolTip="- 10s" HorizontalAlignment="Left" Height="44" Margin="620,534,0,267"  Width="44" FontWeight="Bold" Foreground="Chartreuse" Background="Black" Click="prev_10_bttn_Click"/>
+        <Button x:Name="play_pause_bttn" HorizontalAlignment="Left" Height="44" Margin="664,534,0,267" Width="42" FontWeight="Bold" Foreground="Chartreuse" Background="Black" Click="play_pause_bttn_Click" />
+        <Button x:Name="stop_bttn" HorizontalAlignment="Left" Height="44" Margin="708,534,0,267"  Width="44" FontWeight="Bold" Foreground="Chartreuse" Background="Black" Click="stop_bttn_Click"/>
+        <Button x:Name="next_10_bttn" ToolTip="+ 10s" HorizontalAlignment="Left" Height="44" Margin="752,534,0,267"  Width="44" FontWeight="Bold" Foreground="Chartreuse" Background="Black" Click="next_10_bttn_Click"/>
+        <Button x:Name="next_frame_bttn" ToolTip="Next frame" HorizontalAlignment="Left" Height="44" Margin="796,534,0,267"  Width="44" FontWeight="Bold" Foreground="Chartreuse" Background="Black" Click="next_frame_bttn_Click"/>
+        <Button Content="Export video" Margin="907,766,10,0" VerticalAlignment="Top" Height="44" Click="export_func_bttn_Click" Background="Black" Foreground="Chartreuse" BorderBrush="Chartreuse"/>
+
+        <!-- MEDIA PLAYER INFORMATION -->
+        <Slider x:Name="slider_time" ValueChanged="Slider_ValueChanged" HorizontalAlignment="Left" Margin="69,507,0,0" VerticalAlignment="Top" Width="1333" Minimum="0" Maximum="100" Value="0" TabIndex="0" Height="23"/>
+        <TextBox x:Name="textbox_timespan_left" IsReadOnly="true" HorizontalAlignment="Left" Margin="10,506,0,0" TextWrapping="Wrap" Text="00:00:00" VerticalAlignment="Top" Width="54" Height="21" MaxLines="1" HorizontalContentAlignment="Center" BorderBrush="Chartreuse" Background="Black" Foreground="Chartreuse"/>
+        <TextBox x:Name="textbox_timespan_right" IsReadOnly="true" HorizontalAlignment="Left" Margin="1407,506,0,10" TextWrapping="Wrap" Text="00:00:00" VerticalAlignment="Top" Width="54" Height="21" MaxLines="1" HorizontalContentAlignment="Center" BorderBrush="Chartreuse" Background="Black" Foreground="Chartreuse"/>
+        <Label x:Name="label_title" Content="" HorizontalAlignment="Left" Height="32" Margin="10,540,0,0" VerticalAlignment="Top" Width="561" Foreground="Chartreuse" FontFamily="Yu Gothic Medium"/>
+        <Label Content="Input file:" Margin="949,534,0,282" Foreground="Chartreuse" FontWeight="Bold" HorizontalAlignment="Left" Width="69"/>
+        <Label Content="Output directory:" Margin="907,556,0,259" Foreground="Chartreuse" FontWeight="Bold" HorizontalAlignment="Left" Width="111"/>
+        <!-- ADD EFFECT MANAGEMENT -->
+        <GroupBox x:Name="groupBox_changes" Header="Video changes to apply" Margin="15,583,583,0" Foreground="Chartreuse" BorderBrush="White" Background="Black" Height="227" VerticalAlignment="Top" BorderThickness="1,1,1,1">
+            <Grid Margin="10,0,-10,0">
+                <!-- FIRST BLOCK -->
+                <Label Content="1 - Chose the picture to inlay" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="-3,3,0,0" VerticalAlignment="Top" Width="188" BorderBrush="White" Foreground="Chartreuse" BorderThickness="0,0,0,1" RenderTransformOrigin="0.5,0.5"/>
+                <Rectangle x:Name="picture_to_insert" AllowDrop="True" DragOver="picture_to_insert_DragOver" HorizontalAlignment="Left" Height="137" Margin="20,37,0,0" Stroke="Chartreuse" VerticalAlignment="Top" Width="137"/>
+                <Button Content="Browse" HorizontalAlignment="Left" Height="23" Margin="2,179,0,0" VerticalAlignment="Top" Width="179" BorderBrush="Chartreuse" Foreground="Chartreuse" Background="Black" Click="load_picture_to_insert_from_bttn_Click"/>
+                <GridSplitter HorizontalAlignment="Left" Margin="184,0,0,-6" Width="2" Height="215" VerticalAlignment="Bottom"/>
+
+                <!-- SECOND BLOCK -->
+                <Label Content="2 - Select the parameters related to the picture insert" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="185,3,0,0" VerticalAlignment="Top" Width="323" BorderBrush="White" Foreground="Chartreuse" BorderThickness="0,0,1,1" RenderTransformOrigin="0.476,0.669"/>
+                
+                <Label Content="Picture width (pixel):" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="121" Foreground="Chartreuse" RenderTransformOrigin="0.476,0.669" Margin="191,0,0,136" Height="28"/>
+                <TextBox x:Name="picture_to_insert_width_txtbox" IsReadOnly="True" HorizontalAlignment="Left" Margin="311,44,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="36" Foreground="Chartreuse" Background="Black" BorderBrush="Chartreuse" TextChanged="picture_to_insert_width_txtbox_TextChanged"/>
+
+                <Label Content="Picture height (pixel):" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="121" Foreground="Chartreuse" RenderTransformOrigin="0.476,0.669" Margin="191,0,0,109" Height="28" />
+                <TextBox x:Name="picture_to_insert_height_txtbox" HorizontalAlignment="Left" Margin="311,71,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="36" Foreground="Chartreuse" Background="Black" BorderBrush="Chartreuse" TextChanged="picture_to_insert_height_txtbox_TextChanged"/>
+                <CheckBox x:Name="autoscale_height_txtbox" Content="Auto scale height" HorizontalAlignment="Left" Margin="352,74,0,0" VerticalAlignment="Top" Width="134" Foreground="Chartreuse" Checked="autoscale_height_txtbox_Checked" Unchecked="autoscale_height_txtbox_Checked"/>
+                
+                <Label Content="Position" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="324" BorderBrush="White" Foreground="Chartreuse" BorderThickness="1,1,1,1" RenderTransformOrigin="0.476,0.669" Margin="185,0,0,79" Height="28"/>
+                <Button x:Name ="pos1_bttn" Content="1" HorizontalAlignment="Left" Margin="187,126,0,0" VerticalAlignment="Top" Height="38" Width="79" Background="Black" BorderBrush="Chartreuse" Foreground="Chartreuse" Click="pos_bttn_Click"/>
+                <Button x:Name ="pos2_bttn" Content="2" HorizontalAlignment="Left" Margin="267,126,0,0" VerticalAlignment="Top" Height="38" Width="79" Foreground="Chartreuse" BorderBrush="Chartreuse" Background="Black" Click="pos_bttn_Click"/>
+                <Button x:Name ="pos3_bttn" Content="3" HorizontalAlignment="Left" Margin="347,126,0,0" VerticalAlignment="Top" Height="38" Width="79" Background="Black" BorderBrush="Chartreuse" Foreground="Chartreuse" Click="pos_bttn_Click"/>
+                <Button x:Name ="pos4_bttn" Content="4" HorizontalAlignment="Left" Margin="427,126,0,0" VerticalAlignment="Top" Height="38" Width="79" Background="Black" BorderBrush="Chartreuse" Foreground="Chartreuse" Click="pos_bttn_Click"/>
+                <Button x:Name ="pos5_bttn" Content="5" HorizontalAlignment="Left" Margin="187,166,0,0" VerticalAlignment="Top" Height="38" Width="79" Background="Black" BorderBrush="Chartreuse" Foreground="Chartreuse" Click="pos_bttn_Click"/>
+                <Button x:Name ="pos6_bttn" Content="6" HorizontalAlignment="Left" Margin="267,166,0,0" VerticalAlignment="Top" Height="38" Width="79" Background="Black" BorderBrush="Chartreuse" Foreground="Chartreuse" Click="pos_bttn_Click"/>
+                <Button x:Name ="pos7_bttn" Content="7" HorizontalAlignment="Left" Margin="347,166,0,0" VerticalAlignment="Top" Height="38" Width="79" Background="Black" BorderBrush="Chartreuse" Foreground="Chartreuse" Click="pos_bttn_Click"/>
+                <Button x:Name ="pos8_bttn" Content="8" HorizontalAlignment="Left" Margin="427,166,0,0" VerticalAlignment="Top" Height="38" Width="79" Background="Black" BorderBrush="Chartreuse" Foreground="Chartreuse" Click="pos_bttn_Click"/>
+                <GridSplitter HorizontalAlignment="Left" Margin="507,0,0,-6" Width="2" Height="215" VerticalAlignment="Bottom"/>
+
+                <!-- THIRD BLOCK -->
+                <Label Content="3 - Capture start and stop time for the insertion" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="508,3,0,0" VerticalAlignment="Top" Width="267" BorderBrush="White" Foreground="Chartreuse" BorderThickness="0,0,1,1" RenderTransformOrigin="0.476,0.669"/>
+                <TextBox x:Name="start_time_textbox" Text="00:00:00" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" HorizontalAlignment="Left" Margin="576,70,0,0" VerticalAlignment="Top" Width="84" Background ="Black" BorderBrush="Chartreuse" Foreground="Chartreuse" BorderThickness="1,1,1,1" Height="33"/>
+                <Button x:Name = "capture_start_time_bttn" ToolTip="Stores the current video timespan as the start time for the effect to apply" Content="Capture start time" Width="102" Background="Black" BorderBrush="Chartreuse" Foreground="Chartreuse" Margin="665,70,0,101" HorizontalAlignment="Left" Click="capture_time_Click"/>
+                <TextBox x:Name="stop_time_textbox" Text="00:00:00" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" HorizontalAlignment="Left" Margin="576,114,0,0" VerticalAlignment="Top" Width="84" Background ="Black" BorderBrush="Chartreuse" Foreground="Chartreuse" BorderThickness="1,1,1,1" Height="33" />
+                <Button x:Name = "capture_stop_time_bttn" ToolTip="Stores the current video timespan as the stop time for the effect to apply"  Content="Capture stop time" Width="102" Background="Black" BorderBrush="Chartreuse" Foreground="Chartreuse" Margin="665,114,0,57" HorizontalAlignment="Left" Click="capture_time_Click"/>
+                <GridSplitter HorizontalAlignment="Left" Margin="774,0,0,-6" Width="2" Height="215" VerticalAlignment="Bottom"/>
+
+                <!-- FOURTH BLOCK -->
+                <Button x:Name="add_picture_bttn" Content="Add picture" Margin="778,0,12,-1" BorderBrush="Chartreuse" Foreground="Chartreuse" Background="Black" Click="add_picture_bttn_Click"/>
+            </Grid>
+        </GroupBox>
+
+        <!-- HISTORY MANAGEMENT -->
+        <ListBox x:Name="modif_info_list" Margin="907,591,10,84"/>
+    </Grid>
+</Window>

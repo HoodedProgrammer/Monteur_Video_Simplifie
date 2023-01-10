@@ -81,8 +81,7 @@ namespace Monteur_Video_Simplifie_WFP
             //Loading the pictures contained by the media player button            
             play_pause_bttn.Content = new Image { Source = new BitmapImage(new Uri(imgs_root_dir + "Play.png", UriKind.RelativeOrAbsolute)) };
             prev_frame_bttn.Content = new Image { Source = new BitmapImage(new Uri(imgs_root_dir + "Previous_frame.png", UriKind.RelativeOrAbsolute)) };
-            prev_10_bttn.Content    = new Image { Source = new BitmapImage(new Uri(imgs_root_dir + "Previous_10s.png", UriKind.RelativeOrAbsolute)) };
-            play_pause_bttn.Content = new Image { Source = new BitmapImage(new Uri(imgs_root_dir + "Previous_10s.png", UriKind.RelativeOrAbsolute)) };
+            prev_10_bttn.Content    = new Image { Source = new BitmapImage(new Uri(imgs_root_dir + "Previous_10s.png", UriKind.RelativeOrAbsolute)) };            
             stop_bttn.Content       = new Image { Source = new BitmapImage(new Uri(imgs_root_dir + "Stop.png", UriKind.RelativeOrAbsolute)) };
             next_10_bttn.Content    = new Image { Source = new BitmapImage(new Uri(imgs_root_dir + "Next_10s.png", UriKind.RelativeOrAbsolute)) };
             next_frame_bttn.Content = new Image { Source = new BitmapImage(new Uri(imgs_root_dir + "Next_frame.png", UriKind.RelativeOrAbsolute)) };
@@ -616,7 +615,7 @@ namespace Monteur_Video_Simplifie_WFP
         /*******************************/
         /* VITAL FOR LOADING THE ICONES*/
         /*******************************/
-        string imgs_root_dir = @"C:\Users\alexo\OneDrive\Documents\Visual Studio 2022\Projects\Monteur_Video_Simplifie_WFP\";        
+        string imgs_root_dir = @"";
     }
 
     /*********************************************************************************************************************************************************/
